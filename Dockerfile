@@ -16,7 +16,6 @@ RUN wget https://nginx.org/download/nginx-1.21.5.tar.gz \
     --lock-path=/var/lock/nginx.lock \
     --pid-path=/var/run/nginx.pid \
     --with-http_ssl_module \
-    --with-http_image_filter_module=dynamic \
     --modules-path=/etc/nginx/modules \
     --with-http_v2_module \
     --with-stream=dynamic \
