@@ -10,7 +10,7 @@ RUN tar zxf nginx-1.21.5.tar.gz \
     --prefix=/var/www/html \
     --sbin-path=/usr/sbin/nginx \
     --http-log-path=/home/container/nginx/access.log \
-    --error-log-path=/home/container/error.log \
+    --error-log-path=/home/container/nginx/error.log \
     --with-pcre \
     --lock-path=/var/lock/nginx.lock \
     --pid-path=/var/run/nginx.pid \
