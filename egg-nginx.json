@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-10-31T12:16:49-04:00",
+    "exported_at": "2019-10-31T12:16:49-04:00",
     "name": "Nginx",
-    "author": "unknown@unknown.com",
+    "author": "tweak@talosbot.xyz",
     "description": "Nginx",
-    "image": "registry.gitlab.com\/tenten8401\/pterodactyl-nginx",
+    "image": "quay.io\/tweak4141\/pterodactyl-nginx-1.21",
     "startup": "{{STARTUP_CMD}}",
     "config": {
         "files": "{\r\n    \"nginx\/conf.d\/default.conf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"    listen \": \"    listen {{server.build.default.port}};\"\r\n        }\r\n    }\r\n}",
