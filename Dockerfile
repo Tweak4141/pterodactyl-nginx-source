@@ -12,7 +12,8 @@ RUN apk add \
     tar \
     bash \
     wget \
-    curl 
+    curl \
+    git
     
 RUN apk add --no-cache \
     php81 \ 
