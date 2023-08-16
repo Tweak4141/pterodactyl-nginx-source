@@ -121,5 +121,6 @@ ENV HOME /home/container
 WORKDIR /home/container
 
 COPY ./entrypoint.sh /entrypoint.sh
+COPY ./startup /home/container/startup
 
 CMD ["/bin/ash", "/entrypoint.sh"]
