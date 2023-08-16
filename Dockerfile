@@ -1,4 +1,15 @@
-FROM alpine:3.16
+ARG NODE_VERSION=18.16.0
+ARG ALPINE_VERSION=3.16
+
+FROM node:${NODE_VERSION}-alpine AS node
+FROM alpine:${ALPINE_VERSION}
+
+COPY --from=node /usr/lib /usr/lib
+COPY --from=node /usr/local/lib /usr/local/lib
+COPY --from=node /usr/local/include /usr/local/include
+COPY --from=node /usr/local/bin /usr/local/bin
+
+RUN npm install -g yarn --force
 
 RUN apk --update --no-cache add ca-certificates
 RUN apk add \
@@ -79,10 +90,12 @@ RUN apk add --no-cache \
     php81-xsl \
     php81-zip
  
-RUN wget https://nginx.org/download/nginx-1.23.3.tar.gz \
+RUN git clone https://github.com/aperezdc/ngx-fancyindex.git ngx-fancyindex \
+ && wget https://nginx.org/download/nginx-1.23.3.tar.gz \
  && tar zxf nginx-1.23.3.tar.gz \
  && cd nginx-1.23.3 \
  && ./configure \
+    --add-module=../ngx-fancyindex \
     --with-http_mp4_module \
     --with-http_sub_module \
     --prefix=/var/www/html \
