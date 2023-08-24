@@ -1,5 +1,5 @@
 ARG NODE_VERSION=18.16.0
-ARG ALPINE_VERSION=3.16
+ARG ALPINE_VERSION=3.15
 
 FROM node:${NODE_VERSION}-alpine AS node
 FROM alpine:${ALPINE_VERSION}
@@ -12,10 +12,10 @@ COPY --from=node /usr/local/bin /usr/local/bin
 RUN npm install -g yarn --force
 
 ENV PYTHONUNBUFFERED=1
-RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+RUN apk add --update --no-cache python3 
 RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
-RUN apk add python2
+RUN apk add --update --no-cache python2 && ln -sf python3 /usr/bin/python
 
 RUN apk --update --no-cache add ca-certificates
 RUN apk add \
