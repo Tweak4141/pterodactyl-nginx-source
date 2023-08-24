@@ -31,7 +31,13 @@ RUN apk add \
     wget \
     curl \
     git \
-    bash 
+    bash \ 
+    build-base \
+    g++ \
+    cairo-dev \
+    jpeg-dev \
+    pango-dev \
+    giflib-dev
     
  
 RUN git clone https://github.com/aperezdc/ngx-fancyindex.git ngx-fancyindex \
