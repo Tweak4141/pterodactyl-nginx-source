@@ -12,7 +12,7 @@ COPY --from=node /usr/local/bin /usr/local/bin
 RUN npm install -g yarn --force
 
 ENV PYTHONUNBUFFERED=1
-RUN apk add --update --no-cache python3 
+RUN apk add --update --no-cache python3 python3-dev python2-dev
 RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
 RUN apk add --update --no-cache python2 && ln -sf python2 /usr/bin/python
