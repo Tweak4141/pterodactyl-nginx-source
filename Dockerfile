@@ -9,13 +9,7 @@ COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-RUN apk update && \
-    apk add bash build-base gcc wget git autoconf libmcrypt-dev libzip-dev zip \
-    g++ make openssl-dev \
-    php81-openssl \
-    php81-pdo_mysql \
-    php81-mbstring
+RUN docker-php-ext-install mysqli pdo pdo_mysql gd
 
 RUN npm install -g yarn --force
 
