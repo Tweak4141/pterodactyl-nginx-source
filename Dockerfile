@@ -46,7 +46,7 @@ RUN apk add \
     jpeg-dev \
     pango-dev \
     giflib-dev \
-    opencv \
+    opencv 
     
  
 RUN git clone https://github.com/aperezdc/ngx-fancyindex.git ngx-fancyindex \
