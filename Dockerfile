@@ -3,11 +3,19 @@ ARG ALPINE_VERSION=3.16
 
 FROM node:${NODE_VERSION}-alpine AS node
 FROM php:8.1-fpm-alpine3.15
-
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
+RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
+RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories
+RUN docker-php-ext-install mysqli
+RUN apk update && \
+    apk add bash build-base gcc wget git autoconf libmcrypt-dev libzip-dev zip \
+    g++ make openssl-dev \
+    php81-openssl \
+    php81-pdo_mysql \
+    php81-mbstring
 
 RUN npm install -g yarn --force
 
