@@ -61,9 +61,9 @@ RUN apk add \
     
  
 RUN git clone https://github.com/aperezdc/ngx-fancyindex.git ngx-fancyindex \
- && wget https://nginx.org/download/nginx-1.23.3.tar.gz \
- && tar zxf nginx-1.23.3.tar.gz \
- && cd nginx-1.23.3 \
+ && wget https://nginx.org/download/nginx-1.23.4.tar.gz \
+ && tar zxf nginx-1.23.4.tar.gz \
+ && cd nginx-1.23.4 \
  && ./configure \
     --add-module=../ngx-fancyindex \
     --with-http_mp4_module \
