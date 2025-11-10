@@ -1,15 +1,21 @@
-ARG NODE_VERSION=18.16.0
-ARG ALPINE_VERSION=3.22
-
-FROM node:${NODE_VERSION}-alpine AS node
 FROM php:8.2-fpm-alpine
-COPY --from=node /usr/lib /usr/lib
-COPY --from=node /usr/local/lib /usr/local/lib
-COPY --from=node /usr/local/include /usr/local/include
-COPY --from=node /usr/local/bin /usr/local/bin
-RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
-RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories
-RUN apk add --no-cache mysql-client msmtp perl wget procps shadow libzip libpng libjpeg-turbo libwebp freetype icu icu-data-full
+
+# RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
+#  && echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
+
+RUN apk add --no-cache nodejs npm \
+    mysql-client msmtp perl wget procps shadow libzip libpng libjpeg-turbo libwebp freetype icu icu-data-full
+    
+RUN apk add --no-cache --virtual .build-essentials \
+      icu-dev zlib-dev g++ make automake autoconf libzip-dev \
+      libpng-dev libwebp-dev libjpeg-turbo-dev freetype-dev \
+  && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+  && docker-php-ext-install gd mysqli pdo_mysql intl opcache exif zip \
+  && apk del .build-essentials \
+  && rm -rf /usr/src/php*
+
+RUN wget https://getcomposer.org/composer-stable.phar -O /usr/local/bin/composer && chmod +x /usr/local/bin/composer
+RUN npm install -g yarn --force
 
 RUN apk add --no-cache --virtual build-essentials \
     icu-dev icu-libs zlib-dev g++ make automake autoconf libzip-dev \
