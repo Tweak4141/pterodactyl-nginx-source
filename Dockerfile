@@ -4,15 +4,7 @@ FROM php:8.2-fpm-alpine
 #  && echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
 
 RUN apk add --no-cache nodejs npm \
-    mysql-client msmtp perl wget procps shadow libzip libpng libjpeg-turbo libwebp freetype icu icu-data-full
-    
-RUN apk add --no-cache --virtual .build-essentials \
-      icu-dev zlib-dev g++ make automake autoconf libzip-dev \
-      libpng-dev libwebp-dev libjpeg-turbo-dev freetype-dev \
-  && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
-  && docker-php-ext-install gd mysqli pdo_mysql intl opcache exif zip \
-  && apk del .build-essentials \
-  && rm -rf /usr/src/php*
+    mysql-client msmtp perl wget procps shadow libzip libpng libjpeg-turbo libwebp freetype icu icu-data-full icu-dev zlib-dev libzip-dev freetype-dev libjpeg-turbo-dev libwebp-dev libpng-dev
 
 RUN wget https://getcomposer.org/composer-stable.phar -O /usr/local/bin/composer && chmod +x /usr/local/bin/composer
 RUN npm install -g yarn --force
