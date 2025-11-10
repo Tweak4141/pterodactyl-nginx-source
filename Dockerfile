@@ -1,8 +1,8 @@
 ARG NODE_VERSION=18.16.0
-ARG ALPINE_VERSION=3.16
+ARG ALPINE_VERSION=3.22
 
 FROM node:${NODE_VERSION}-alpine AS node
-FROM php:8.1-fpm-alpine3.15
+FROM php:8.2-fpm-alpine
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
