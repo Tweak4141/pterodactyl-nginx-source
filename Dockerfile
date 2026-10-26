@@ -78,6 +78,7 @@ RUN git clone https://github.com/aperezdc/ngx-fancyindex.git ngx-fancyindex \
     --with-http_v2_module \
     --with-stream=dynamic \
     --with-http_addition_module \
+    --with-cc-opt="-Wno-error=unterminated-string-initialization" \
 && make \
 && make install
 
