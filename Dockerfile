@@ -1,4 +1,4 @@
-FROM php:8.2-fpm-alpine
+FROM php:8.3-fpm-alpine
 
 # RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
 #  && echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
